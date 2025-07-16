@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			ユーザーログイン画面
+		</title>
+		<style>
+			body {
+				font-family: 'Arial', sans-serif;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				margin: 0 auto;
+			}
+			a {
+				color: initial;
+				text-decoration: none;
+				user-select: none;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+			}
+			h2 {
+				user-select: none;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+			}
+			.main{
+				text-align: center;
+				box-sizing: border-box;
+			}
+			.message {
+				margin-bottom: 20px;
+				font-weight: bold;
+			}
+			.error {
+				color: red;
+			}
+			.success {
+				color: green;
+			}
+			.main h2 {
+				font-size: 50px;
+			}
+			form {
+				display: inline-block;
+				margin: 0 auto;
+			}
+			input {
+				display: block;
+				width: 50ch;
+				font-size: 25px;
+				margin-bottom: 40px;
+			}
+			.new-btn {
+				margin-right: 200px;
+				font-size: 16px;
+				width: 100px;
+				background-color: rgba(255, 165, 0, 0.7);
+				padding: 10px 10px;
+				border-radius: 20px;
+				border: none;
+			}
+			.new-btn:hover {
+				background-color: rgba(255, 165, 0, 1);
+				padding: 10px 10px;
+				border-radius: 20px;
+				border: none;
+			}
+			.login-btn {		
+				margin-left: 200px;
+				width: 100px;
+				font-size: 16px;
+				background-color: rgba(0, 225, 255, 0.5);
+				padding: 10px 10px;
+				border-radius: 20px;
+				border: none;
+			}
+			.login-btn:hover {		
+				background-color: rgba(0, 225, 255, 1);
+				padding: 10px 10px;
+				border-radius: 20px;
+				border: none;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<h2>
+				ユーザーログイン画面
+			</h2>
+			@if (session('success'))
+				<div class="message success">
+					{{ session('success')}}
+				</div>
+			@endif
+			@if ($errors->has('login_error'))
+				<div class="message error">
+					{{ $errors->first('login_error') }}
+				</div>
+			@endif
+			<form action="/user_login" method="post">
+				@csrf
+				<div class="input-text">
+					<input type="password" name="password" placeholder="パスワード" required autocomplete="email" />
+					<input type="email" name="email" placeholder="メールアドレス" required autocomplete="current-password" />
+				</div>
+				<div class="input-btn">
+					<button class="new-btn" type="button" onclick="location.href='user_new_registration'">
+						新規登録
+					</button>
+					<button class="login-btn" type="submit">
+						ログイン
+					</button>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>
